@@ -31,7 +31,7 @@ payload_ashx = f"{rand_text_alpha_lower(8)}.ashx"
 payload_handler_class = rand_text_alpha(8)
 payload_psi_var = rand_text_alpha(8)
 session = requests.Session()
-
+ 
 
 CONTACT ME ON TELEGRAM - @banksnshop
 
